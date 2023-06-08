@@ -1,111 +1,149 @@
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
     <title>HARU</title>
 
     <style>
-        .logo {
-            background-color: grey;
+      .logo {
+        background-color: grey;
 
-            height: 200px;
-            margin: 30px 150px 30px 150px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .registration {
-            height: 30px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-end;
-            margin: 30px 200px 30px 200px;
-            
-            
-        }
-        .harubody {
-            height: 240px;
-            display: flex;
-            justify-content: center;
-            margin: 30px auto 30px auto;
-            overflow: hidden;
-        }
-        .card {
-            margin: 30px 30px 30px 30px;
-        }
-
-    
-        
+        height: 200px;
+        margin: 30px 150px 30px 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .registration {
+        height: 30px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        margin: 30px 200px 30px 200px;
+      }
+      .harubody {
+        height: 240px;
+        display: flex;
+        justify-content: center;
+        margin: 30px auto 30px auto;
+        overflow: hidden;
+      }
+      .card {
+        margin: 30px 30px 30px 30px;
+      }
     </style>
-</head>
+    <script>
+      $(document).ready(function () {
+        show_bucket();
+      });
 
-<body>
+      function show_bucket() {
+        fetch("/haru")
+          .then((res) => res.json())
+          .then((data) => {
+            let rows = data["buckets"];
+            rows.forEach((e) => {
+              let num = e["num"];
+              let bucket = e["bucket"];
+              let done = e["done"];
+
+              let temp_html = ``;
+              if (done == 0) {
+                temp_html = `<li>
+                                <h2>✅ ${bucket}</h2>
+                                <button onclick="done_bucket(${num})" type="button" class="btn btn-outline-primary">완료!</button>
+                            </li>`;
+              } else {
+                temp_html = `<li>
+                                <h2>✅ ${bucket} 완료 !!</h2>
+                            </li>`;
+              }
+
+              $("#bucket-list").append(temp_html);
+            });
+          });
+      }
+    </script>
+  </head>
+
+  <body>
     <div class="logo">
-        <h3>우리의 개발일상</h3>
-        <h1>HARU</h1>
+      <h3>우리의 개발일상</h3>
+      <h1>HARU</h1>
     </div>
 
     <div class="registration">
-        <button onclick="location.href='add.html'">등록</button>
+      <a
+        class="btn btn-outline-dark mt-auto"
+        style="font-size: 13px"
+        href="/add"
+        >등록</a
+      >
     </div>
 
     <div class="harubody">
-        <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-            <div class="card-header">헤더</div>
-            <div class="card-body">
-                <h5 class="card-title">First</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-            </div>
+      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+        <div class="card-header">헤더</div>
+        <div class="card-body">
+          <h5 class="card-title">First</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
         </div>
+      </div>
 
-        <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-            <div class="card-header">헤더</div>
-            <div class="card-body">
-                <h5 class="card-title">First</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-            </div>
+      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+        <div class="card-header">헤더</div>
+        <div class="card-body">
+          <h5 class="card-title">First</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
         </div>
+      </div>
 
-        <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-            <div class="card-header">헤더</div>
-            <div class="card-body">
-                <h5 class="card-title">First</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-            </div>
+      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+        <div class="card-header">헤더</div>
+        <div class="card-body">
+          <h5 class="card-title">First</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
         </div>
+      </div>
 
-        <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-            <div class="card-header">헤더</div>
-            <div class="card-body">
-                <h5 class="card-title">First</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-            </div>
+      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+        <div class="card-header">헤더</div>
+        <div class="card-body">
+          <h5 class="card-title">First</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
         </div>
+      </div>
     </div>
-    
-</body>
-
+  </body>
 </html>

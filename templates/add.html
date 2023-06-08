@@ -89,6 +89,22 @@
         border-color: white;
       }
     </style>
+    <script>
+      function save_bucket() {
+        let bucket = $("#haru_title").val();
+        let bucket = $("#bucket_body").val();
+
+        let formData = new FormData();
+        formData.append("bucket_give", bucket);
+        formData.append("bucket_body_give", bucket);
+        fetch("/haru/write", { method: "POST", body: formData })
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data["msg"]);
+            window.location.reload();
+          });
+      }
+    </script>
   </head>
 
   <body>
@@ -105,11 +121,12 @@
 
       <div class="form-floating">
         <textarea
+          id="haru_title"
           class="form-control"
           placeholder="Leave a comment here"
-          id="floatingTextarea"
           style="height: 150px"
         ></textarea>
+        <input type="submit" value="전송" />
         <label for="floatingTextarea" style="font-size: 400%"
           >제목을 입력하세요</label
         >
@@ -119,9 +136,9 @@
 
       <div class="form-floating">
         <textarea
+          id="haru_body"
           class="form-control"
           placeholder="Leave a comment here"
-          id="floatingTextarea"
           style="height: 900px"
         ></textarea>
         <label for="floatingTextarea" style="font-size: 200%"
