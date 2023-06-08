@@ -1,70 +1,77 @@
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
 
     <title>HARU</title>
 
     <style>
-        .logo {
-            background-color: grey;
+      .logo {
+        background-color: grey;
 
-            height: 200px;
-            margin: 30px 150px 30px 150px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+        height: 200px;
+        margin: 30px 150px 30px 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
-        .registration {
-            height: 30px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-end;
-            margin: 30px 200px 30px 200px;
+      .registration {
+        height: 30px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        margin: 30px 200px 30px 200px;
+      }
 
+      .harubody {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: flex-start;
+      }
 
-        }
-
-        .harubody {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            width: 100%;
-            justify-content: flex-start;
-            
-        }
-
-        .card {
-           width: 100%;
-           margin: 0px 0px 50px 50px;
-        }
+      .card {
+        width: 100%;
+        margin: 0px 0px 50px 50px;
+      }
     </style>
 
     <script>
-        $(document).ready(function() {
-            show_diary();
-        });
+      $(document).ready(function () {
+        show_diary();
+      });
 
-        function show_diary() {
-            fetch('/guestbook').then((response) => response.json()).then((data) => {
-                let rows = data['result']
-                $('#card-list').empty()
-                rows.forEach((a=>{
-                    let title = a['title']
-                    let comment = a['comment']
+      function show_diary() {
+        fetch("/guestbook")
+          .then((response) => response.json())
+          .then((data) => {
+            let rows = data["result"];
+            $("#card-list").empty();
+            rows.forEach((a) => {
+              let title = a["title"];
+              let comment = a["comment"];
 
-                    let temp_html = `<div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+              let temp_html = `<div class="card text-dark bg-light mb-3" style="max-width: 18rem" onclick="location.href='/asda'">
                                         <div class="card-header">아이디</div>
                                         <div class="card-body">
                                             <h5 class="card-title">${title}</h5>
@@ -72,71 +79,72 @@
                                                 ${comment}
                                             </p>
                                         </div>
-                                    </div> `
-                    $('#card-list').append(temp_html)
-                }))
+                                    </div> `;
+              $("#card-list").append(temp_html);
             });
-        }
-
+          });
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="logo">
-        <h3>우리의 개발일상</h3>
-        <h1>HARU</h1>
+      <h3>우리의 개발일상</h3>
+      <h1>HARU</h1>
     </div>
 
     <div class="registration">
-        <button onclick="location.href='/add'">등록</button>
+      <button onclick="location.href='/add'">등록</button>
     </div>
 
     <div class="harubody" id="card-list">
-        <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-            <div class="card-header">헤더</div>
-            <div class="card-body">
-                <h5 class="card-title">First</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-            </div>
+      <div
+        class="card text-dark bg-light mb-3"
+        style="max-width: 18rem"
+        onclick="location.href='/asda'"
+      >
+        <div class="card-header">헤더</div>
+        <div class="card-body">
+          <h5 class="card-title">First</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
         </div>
+      </div>
 
-        <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-            <div class="card-header">헤더</div>
-            <div class="card-body">
-                <h5 class="card-title">First</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-            </div>
+      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+        <div class="card-header">헤더</div>
+        <div class="card-body">
+          <h5 class="card-title">First</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
         </div>
+      </div>
 
-        <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-            <div class="card-header">헤더</div>
-            <div class="card-body">
-                <h5 class="card-title">First</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-            </div>
+      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+        <div class="card-header">헤더</div>
+        <div class="card-body">
+          <h5 class="card-title">First</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
         </div>
+      </div>
 
-        <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-            <div class="card-header">헤더</div>
-            <div class="card-body">
-                <h5 class="card-title">First</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-            </div>
+      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+        <div class="card-header">헤더</div>
+        <div class="card-body">
+          <h5 class="card-title">First</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
         </div>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
