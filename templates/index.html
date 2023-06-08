@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    
+
     <title>HARU</title>
 
     <style>
@@ -24,6 +24,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .registration {
             height: 30px;
             display: flex;
@@ -31,9 +32,10 @@
             align-items: center;
             justify-content: flex-end;
             margin: 30px 200px 30px 200px;
-            
-            
+
+
         }
+
         .harubody {
             height: 240px;
             display: flex;
@@ -41,13 +43,39 @@
             margin: 30px auto 30px auto;
             overflow: hidden;
         }
+
         .card {
             margin: 30px 30px 30px 30px;
         }
-
-    
-        
     </style>
+
+    <script>
+        $(document).ready(function() {
+            show_diary();
+        });
+
+        function show_diary() {
+            fetch('/guestbook').then((response) => response.json()).then((data) => {
+                let rows = data['result']
+                $('#card-list').empty()
+                rows.forEach((a=>{
+                    let title = a['title']
+                    let comment = a['comment']
+
+                    let temp_html = `<div class="card text-dark bg-light mb-3" style="max-width: 18rem" onclick="location.href='/asda'">
+                                        <div class="card-header">아이디</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${title}</h5>
+                                            <p class="card-text">
+                                                ${comment}
+                                            </p>
+                                        </div>
+                                    </div> `
+                    $('#card-list').append(temp_html)
+                }))
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -57,11 +85,11 @@
     </div>
 
     <div class="registration">
-        <button onclick="location.href='add.html'">등록</button>
+        <button onclick="location.href='/add'">등록</button>
     </div>
 
-    <div class="harubody">
-        <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+    <div class="harubody" id="card-list">
+        <div class="card text-dark bg-light mb-3" style="max-width: 18rem" onclick="location.href='/asda'">
             <div class="card-header">헤더</div>
             <div class="card-body">
                 <h5 class="card-title">First</h5>
@@ -105,7 +133,7 @@
             </div>
         </div>
     </div>
-    
+
 </body>
 
 </html>
