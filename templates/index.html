@@ -13,11 +13,17 @@
       crossorigin="anonymous"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<<<<<<< HEAD
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+=======
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+>>>>>>> a6cf336d32ffdf03400df1fb590a29212f4256d9
 
     <title>HARU</title>
 
@@ -25,6 +31,7 @@
       .logo {
         background-color: grey;
 
+<<<<<<< HEAD
         height: 200px;
         margin: 30px 150px 30px 150px;
         display: flex;
@@ -55,6 +62,68 @@
       $(document).ready(function () {
         show_bucket();
       });
+=======
+            height: 200px;
+            margin: 30px 150px 30px 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .registration {
+            height: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            margin: 30px 200px 30px 200px;
+
+
+        }
+
+        .harubody {
+            height: 240px;
+            display: flex;
+            justify-content: center;
+            margin: 30px auto 30px auto;
+            overflow: hidden;
+        }
+
+        .card {
+            margin: 30px 30px 30px 30px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            show_diary();
+        });
+
+        function show_diary() {
+            fetch('/guestbook').then((response) => response.json()).then((data) => {
+                let rows = data['result']
+                $('#card-list').empty()
+                rows.forEach((a=>{
+                    let title = a['title']
+                    let comment = a['comment']
+
+                    let temp_html = `<div class="card text-dark bg-light mb-3" style="max-width: 18rem" onclick="location.href='/asda'">
+                                        <div class="card-header">아이디</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${title}</h5>
+                                            <p class="card-text">
+                                                ${comment}
+                                            </p>
+                                        </div>
+                                    </div> `
+                    $('#card-list').append(temp_html)
+                }))
+            });
+        }
+    </script>
+</head>
+>>>>>>> a6cf336d32ffdf03400df1fb590a29212f4256d9
 
       function show_bucket() {
         fetch("/haru")
@@ -92,6 +161,7 @@
     </div>
 
     <div class="registration">
+<<<<<<< HEAD
       <a
         class="btn btn-outline-dark mt-auto"
         style="font-size: 13px"
@@ -109,6 +179,21 @@
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
+=======
+        <button onclick="location.href='/add'">등록</button>
+    </div>
+
+    <div class="harubody" id="card-list">
+        <div class="card text-dark bg-light mb-3" style="max-width: 18rem" onclick="location.href='/asda'">
+            <div class="card-header">헤더</div>
+            <div class="card-body">
+                <h5 class="card-title">First</h5>
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                </p>
+            </div>
+>>>>>>> a6cf336d32ffdf03400df1fb590a29212f4256d9
         </div>
       </div>
 
@@ -145,5 +230,12 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   </body>
 </html>
+=======
+
+</body>
+
+</html>
+>>>>>>> a6cf336d32ffdf03400df1fb590a29212f4256d9

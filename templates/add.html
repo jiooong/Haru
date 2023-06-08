@@ -39,7 +39,7 @@
 
       .dots {
         color: orange;
-        // height: 8px;
+        height: 8px;
         border-width: 0 0 8px;
         border-style: solid;
         border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 1" width="8" height="4"><circle fill="#{$color}" cx="1" cy="0.5" r="0.5"/></svg>')
@@ -90,18 +90,19 @@
       }
     </style>
     <script>
-      function save_bucket() {
-        let bucket = $("#haru_title").val();
-        let bucket = $("#bucket_body").val();
+      function save() {
+        let title = $("#title").val();
+        let comment = $("#comment").val();
 
         let formData = new FormData();
-        formData.append("bucket_give", bucket);
-        formData.append("bucket_body_give", bucket);
-        fetch("/haru/write", { method: "POST", body: formData })
+        formData.append("title_give", title);
+        formData.append("comment_give", comment);
+
+        fetch("/guestbook", { method: "POST", body: formData })
           .then((response) => response.json())
           .then((data) => {
             alert(data["msg"]);
-            window.location.reload();
+            location.href = "/";
           });
       }
     </script>
@@ -115,19 +116,24 @@
     <div class="bigbox">
       <div class="mybtn">
         <div class="d-grid gap-3 d-md-flex justify-content-md-end">
-          <button type="button" class="btn btn-outline-secondary">뒤로</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            onclick="history.back()"
+          >
+            뒤로
+          </button>
         </div>
       </div>
 
       <div class="form-floating">
         <textarea
-          id="haru_title"
           class="form-control"
           placeholder="Leave a comment here"
+          id="title"
           style="height: 150px"
         ></textarea>
-        <input type="submit" value="전송" />
-        <label for="floatingTextarea" style="font-size: 400%"
+        <label for="floatingTextarea1" style="font-size: 400%"
           >제목을 입력하세요</label
         >
       </div>
@@ -136,18 +142,24 @@
 
       <div class="form-floating">
         <textarea
-          id="haru_body"
           class="form-control"
           placeholder="Leave a comment here"
+          id="comment"
           style="height: 900px"
         ></textarea>
-        <label for="floatingTextarea" style="font-size: 200%"
+        <label for="floatingTextarea2" style="font-size: 200%"
           >내용을 입력하세요</label
         >
       </div>
 
       <div class="registerbtn">
-        <button type="button" class="btn btn-outline-secondary">등록</button>
+        <button
+          onclick="save()"
+          type="button"
+          class="btn btn-outline-secondary"
+        >
+          등록
+        </button>
       </div>
     </div>
   </body>
