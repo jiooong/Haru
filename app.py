@@ -15,11 +15,14 @@ def signup():
 
 @app.route("/guestbook", methods=["POST"])
 def guestbook_post():
+    diary_list = list(db.diary.find({}, {'_id': False}))
+    count = len(diary_list) + 1
     title_receive = request.form['title_give']
     comment_receive = request.form['comment_give']
     doc = {
         'title':title_receive,
-        'comment':comment_receive
+        'comment':comment_receive,
+        'num':count
     }
     db.diary.insert_one(doc)
 
