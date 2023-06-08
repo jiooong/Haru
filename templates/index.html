@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <title>HARU</title>
+
+    <style>
+        .logo {
+            background-color: grey;
+
+            height: 200px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search {
+            height: 40px;
+            width: 240px;
+            border: 1px solid black;
+            background: #ffffff;
+        }
+        .input {
+            font-size: 16px;
+            width: 325px;
+            padding: 10px;
+            border: 0px;
+            outline: none;
+        }
+        
+
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <h3>우리의 개발일상</h3>
+        <h1>HARU</h1>
+    </div>
+
+    <div class="search">
+        <input type="text" placeholder="작성자">
+        <button>검색</button>
+    </div>
+    
+
+    <div style=" cursor: pointer;" onclick="location.href='목적지 링크주소(URL)';">
+        <div class="card border-dark mb-4" style="max-width: 18rem;">
+            <div class="card-header">작성자</div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title">제목</h5>
+                    <p class="card-text">내용</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
