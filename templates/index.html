@@ -29,6 +29,7 @@
       }
 
       .logo {
+        
         width: 100%;
         height: 250px;
 
@@ -42,7 +43,6 @@
         background-size: cover;
 
         color: white;
-
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -52,10 +52,10 @@
       .registration {
         height: 30px;
         display: flex;
-        flex-direction:row;
+        flex-direction: row;
         align-items: center;
-        justify-content: center;
-        margin: 30px 30px 30px 30px;
+        justify-content: flex-end;
+        margin: 30px 200px 30px 200px;
       }
 
       .harubody {
@@ -77,6 +77,12 @@
         show_diary();
       });
 
+      function move(num){
+        var url = '/modify';
+        url = url + "?num=" + num;
+        location.href = url;
+      }
+
       function show_diary() {
         fetch("/guestbook")
           .then((response) => response.json())
@@ -84,14 +90,15 @@
             let rows = data["result"];
             $("#card-list").empty();
             rows.forEach((a) => {
+              let num = a["num"]
               let title = a["title"];
               let comment = a["comment"];
-              let num = a["num"];
 
-              let temp_html = `<div class="card text-dark bg-light mb-3" style="max-width: 18rem" onclick="location.href='/asda'">
-                                        <div class="card-header">${num}</div>
+              let temp_html = `<div class="card text-dark bg-light mb-3" style="max-width: 18rem" onclick="move(${num})">
+                                        <div class="card-header">${title}
+
+                                        </div>
                                         <div class="card-body">
-                                            <h5 class="card-title">${title}</h5>
                                             <p class="card-text">
                                                 ${comment}
                                             </p>
@@ -101,6 +108,8 @@
             });
           });
       }
+
+
     </script>
   </head>
 
@@ -115,57 +124,19 @@
             type="button"
             class="btn btn-outline-secondary"
             onclick="location.href='/add'"
-          >
-            등록
-          </button>
+            style ="margin right:10px;"
+          ><span style='font-size:20px;'>&#127796;</span> 등록</button>
+  
+          
     </div>
 
     <div class="harubody" id="card-list">
       <div
         class="card text-dark bg-light mb-3"
-        style="max-width: 18rem">
-        <div class="card-header">헤더</div>
-        <div class="card-body">
-          <h5 class="card-title">First</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-
-      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-        <div class="card-header">헤더</div>
-        <div class="card-body">
-          <h5 class="card-title">First</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-
-      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-        <div class="card-header">헤더</div>
-        <div class="card-body">
-          <h5 class="card-title">First</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-
-      <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
-        <div class="card-header">헤더</div>
-        <div class="card-body">
-          <h5 class="card-title">First</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
+        style="max-width: 18rem"
+        onclick="move()"
+      >
+        
     </div>
   </body>
 </html>
