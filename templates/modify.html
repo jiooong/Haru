@@ -80,6 +80,68 @@
         border-color: white;
       }
     </style>
+
+    <script>
+       $(document).ready(function () {
+         {% if num %}
+           let temp = {{num}};
+         {% else %}
+           let temp = null;
+         {% endif %}
+         console.log(temp);
+         get_diary();
+       });
+
+
+       function getDiaryIdFromURL() {
+         // return location.href.split("/guestbook/")[1];
+         const regex = /\/guestbook\/(\d+)/;
+         const match = location.href.match(regex);
+
+         return match ? match[1] : null;
+       }
+
+       function get_diary() {
+         let formdata =
+         fetch(`/guestbook?num={{num}}`)
+           .then((response) => response.json())
+           .then((data) => {
+             let rows = data["data"];
+
+             let num = rows.num;
+             let title = rows.title;
+             let comment = rows.comment;
+
+             let temp2_html = `<div class="form-floating">
+                 <div class="modify-head">
+                   <h2>${title}</h2></div>
+               </div>
+
+               <hr class="dots" />
+
+               <div class="modify-body">
+                   <h5>${comment}</h5></div>
+               </div>
+               </div>`;
+
+             $("#diarytitle").append(temp2_html);
+           });
+       }
+
+
+      function del_diary() {
+         let formData =
+         fetch(`/guestbook?num={{num}}`, {
+           method: "DELETE",
+         })
+           .then((res) => res.json())
+           .then((data) => {
+
+             alert(data["msg"]);
+             location.href = "/";
+           });
+       }
+    </script>
   </head>
 
   <body>
@@ -90,36 +152,29 @@
     <div class="bigbox">
       <div class="mybtn">
         <div class="d-grid gap-3 d-md-flex justify-content-md-end">
-          <button type="button" class="btn btn-outline-secondary" onclick="alert('수정완료')">수정</button>
-          <button type="button" class="btn btn-outline-secondary" onclick="alert('삭제완료')">삭제</button>
-          <button type="button" class="btn btn-outline-secondary" onclick="location.href='index.html'">뒤로</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            style="margin right:10px;"
+            onclick="del_diary()"
+          >
+            <span style="font-size: 15px">&#10060;</span>
+            삭제
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            style="margin right:10px;"
+            onclick="location.href='/'"
+          >
+            <span style="font-size: 15px">&#128281;</span>
+            뒤로
+          </button>
         </div>
       </div>
 
-      <div class="form-floating">
-        <textarea
-          class="form-control"
-          placeholder="Leave a comment here"
-          id="floatingTextarea"
-          style="height: 150px"
-        ></textarea>
-        <label for="floatingTextarea" style="font-size: 400%"
-          >제목을 입력하세요</label
-        >
-      </div>
-
-      <hr class="dots" />
-
-      <div class="form-floating">
-        <textarea
-          class="form-control"
-          placeholder="Leave a comment here"
-          id="floatingTextarea"
-          style="height: 900px"
-        ></textarea>
-        <label for="floatingTextarea" style="font-size: 200%"
-          >내용을 입력하세요</label
-        >
+      <div class="modifybody" id="diarytitle" style="text-align: center">
+        <div></div>
       </div>
     </div>
   </body>
